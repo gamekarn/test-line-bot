@@ -10,6 +10,7 @@
     
     //รับข้อความจากผู้ใช้
     $message = $arrayJson['events'][0]['message']['text'];
+    $messageType = $arrayJson['events'][0]['message']['type']
 #ตัวอย่าง Message Type "Text"
     if($message == "สวัสดี"){
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
@@ -62,14 +63,28 @@
         replyMsg($arrayHeader,$arrayPostData);
     }
 
-    else if($message == "สติกเกอร์"){
+    else if($message == "สุ่มสติกเกอร์"){
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "sticker";
         $math = math.random_int(0,150)
         $arrayPostData['messages'][0]['packageId'] = "1";
-        $arrayPostData['messages'][0]['stickerId'] = "$math";
+        $arrayPostData['messages'][0]['stickerId'] = $math.toString();
         replyMsg($arrayHeader,$arrayPostData);
     }
+    
+    eles if ($messageType == "location"){
+        $myLat = $arrayJson['events'][0]['message']['latitude'];    
+        $myLon = $arrayJson['events'][0]['message']['longitude'];    
+    
+        $jsonAQI = json_decode(getAQI($myLat,$myLon), true);
+        $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+        $arrayPostData['messages'][0]['type'] = "text";
+        $arrayPostData['messages'][0]['text'] = 'Nearest AQI : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['pollution']['aqius'] . ']';
+        // $arrayPostData['messages'][0]['text'] = $myLat . $myLon;
+    
+        replyMsg($arrayHeader,$arrayPostData);
+    }
+
 
 function replyMsg($arrayHeader,$arrayPostData){
         $strUrl = "https://api.line.me/v2/bot/message/reply";
@@ -83,6 +98,22 @@ function replyMsg($arrayHeader,$arrayPostData){
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $result = curl_exec($ch);
         curl_close ($ch);
+    }
+
+    function getAQI($currentLat,$currentLon){
+        echo $currentLat;
+        echo $currentLon;
+        // api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}
+        $strUrl = "http://api.airvisual.com/v2/nearest_city?lat=$currentLat&lon=$currentLon&key=5uE3y4hLFGFbDmfto";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$strUrl);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_GET, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($ch);
+        curl_close ($ch);
+        return $result;
     }
    exit;
 ?>
