@@ -90,6 +90,14 @@
         replyMsg($arrayHeader,$arrayPostData);
     }
 
+    if($message == "ราคาทอง") {
+        $jsonInfoGold = json_decode(getInfoGold());
+        $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+        $arrayPostData['messages'][0]['type'] = "text";
+        $arrayPostData['messages'][0]['text'] = 'ราคาทองตอนนี้ ' . $jsonInfoGold['name']
+        replyMsg($arrayHeader,$arrayPostData);
+    }
+
 
 
 
@@ -112,6 +120,20 @@ function replyMsg($arrayHeader,$arrayPostData){
         echo $currentLon;
         // api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}
         $strUrl = "http://api.airvisual.com/v2/nearest_city?lat=$currentLat&lon=$currentLon&key=5uE3y4hLFGFbDmfto";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$strUrl);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_GET, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($ch);
+        curl_close ($ch);
+        return $result;
+    }
+
+    function getInfoGold(){
+        // api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}
+        $strUrl = "http://www.thaigold.info/RealTimeDataV2/gtdata_.txt";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$strUrl);
         curl_setopt($ch, CURLOPT_HEADER, false);
