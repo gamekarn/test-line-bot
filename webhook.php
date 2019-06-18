@@ -84,7 +84,7 @@
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "sticker";
         $arrayPostData['messages'][0]['packageId'] = "1";
-        $arrayPostData['messages'][0]['stickerId'] = (string)$math;
+        $arrayPostData['messages'][0]['stickerId'] = "131";
         replyMsg($arrayHeader,$arrayPostData);
     }
 
