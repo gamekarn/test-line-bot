@@ -72,7 +72,7 @@
         replyMsg($arrayHeader,$arrayPostData);
     }
     
-    eles if ($messageType == "location"){
+    if ($messageType == "location"){
         $myLat = $arrayJson['events'][0]['message']['latitude'];    
         $myLon = $arrayJson['events'][0]['message']['longitude'];    
     
