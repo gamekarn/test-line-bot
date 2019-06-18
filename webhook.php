@@ -85,6 +85,8 @@
         $arrayPostData['messages'][0]['type'] = "sticker";
         $arrayPostData['messages'][0]['packageId'] = "1";
         $arrayPostData['messages'][0]['stickerId'] = $math;
+        $arrayPostData['messages'][1]['type'] = "text";
+        $arrayPostData['messages'][1]['text'] = $math
         replyMsg($arrayHeader,$arrayPostData);
     }
 
