@@ -11,7 +11,7 @@
     //รับข้อความจากผู้ใช้
     $message = $arrayJson['events'][0]['message']['text'];
     $messageType = $arrayJson['events'][0]['message']['type'];
-    
+
 #ตัวอย่าง Message Type "Text"
     if($message == "สวัสดี"){
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
@@ -69,9 +69,12 @@
         $myLon = $arrayJson['events'][0]['message']['longitude'];    
     
         $jsonAQI = json_decode(getAQI($myLat,$myLon), true);
+
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
         $arrayPostData['messages'][0]['text'] = 'Nearest AQI : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['pollution']['aqius'] . ']';
+        $arrayPostData['messages'][1]['type'] = "text";
+        $arrayPostData['messages'][1]['text'] = 'Nearest AQI : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['weather']['tp'] . ']';
         //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
     
         replyMsg($arrayHeader,$arrayPostData);
