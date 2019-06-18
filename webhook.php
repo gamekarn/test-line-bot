@@ -80,7 +80,7 @@
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
         $arrayPostData['messages'][0]['text'] = 'Nearest AQI : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['pollution']['aqius'] . ']';
-        // $arrayPostData['messages'][0]['text'] = $myLat . $myLon;
+        $arrayPostData['messages'][0]['text'] = $myLat . $myLon;
     
         replyMsg($arrayHeader,$arrayPostData);
     }
