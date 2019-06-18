@@ -80,11 +80,11 @@
         replyMsg($arrayHeader,$arrayPostData);
     }
     if($message == "สุ่มสติ๊กเกอร์"){
-        $math = $math.random_int(1,150);
+        $math = (string)$math.random_int(1,150);
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "sticker";
         $arrayPostData['messages'][0]['packageId'] = "1";
-        $arrayPostData['messages'][0]['stickerId'] = "131";
+        $arrayPostData['messages'][0]['stickerId'] = $math;
         replyMsg($arrayHeader,$arrayPostData);
     }
 
