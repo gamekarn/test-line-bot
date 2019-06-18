@@ -61,6 +61,16 @@
         $arrayPostData['messages'][0]['text'] = "ถถถ";
         replyMsg($arrayHeader,$arrayPostData);
     }
+
+    else if($message == "สติกเกอร์"){
+        $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+        $arrayPostData['messages'][0]['type'] = "sticker";
+        $math = math.random_int(0,150)
+        $arrayPostData['messages'][0]['packageId'] = "1";
+        $arrayPostData['messages'][0]['stickerId'] = "$math";
+        replyMsg($arrayHeader,$arrayPostData);
+    }
+
 function replyMsg($arrayHeader,$arrayPostData){
         $strUrl = "https://api.line.me/v2/bot/message/reply";
         $ch = curl_init();
