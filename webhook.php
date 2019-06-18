@@ -62,15 +62,6 @@
         $arrayPostData['messages'][0]['text'] = "ถถถ";
         replyMsg($arrayHeader,$arrayPostData);
     }
-
-    else if($message == "สุ่มสติกเกอร์"){
-        $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-        $arrayPostData['messages'][0]['type'] = "sticker";
-        $math = math.random_int(0,150)
-        $arrayPostData['messages'][0]['packageId'] = "1";
-        $arrayPostData['messages'][0]['stickerId'] = $math.toString();
-        replyMsg($arrayHeader,$arrayPostData);
-    }
     
     if ($messageType == "location"){
         $myLat = $arrayJson['events'][0]['message']['latitude'];    
