@@ -101,17 +101,17 @@
 
     if($message == "เป่ายิงฉุบ") {
         $math = $math.random_int(1,3);
-        $a = ""
+        $a = "";
         if($math == 1) {
-            $a = "ค้อน"
+            $a = "ค้อน";
         } else if($math == 2) {
-            $a = "กรรไกร"
+            $a = "กรรไกร";
         } else {
-            $a = "กระดาษ"
+            $a = "กระดาษ";
         }
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = "พิมพ์ ค้อน กรรไกร หรือ กระดาษ"
+        $arrayPostData['messages'][0]['text'] = "พิมพ์ ค้อน กรรไกร หรือ กระดาษ";
         // if(message == "ค้อน") {
         // }
 
