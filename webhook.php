@@ -83,7 +83,7 @@
         $math = (string)$math.random_int(1,150);
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "sticker";
-        $arrayPostData['messages'][0]['packageId'] = "1";
+        $arrayPostData['messages'][0]['packageId'] = "2";
         $arrayPostData['messages'][0]['stickerId'] = $math;
         $arrayPostData['messages'][1]['type'] = "text";
         $arrayPostData['messages'][1]['text'] = $math;
@@ -94,7 +94,7 @@
         $jsonInfoGold = json_decode(getInfoGold());
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = 'ราคาทองตอนนี้ ' .$jsonInfoGold[1]["bid"];
+        $arrayPostData['messages'][0]['text'] = 'ราคาทองตอนนี้ ' .$jsonInfoGold[1]["bid"]. ' บาท';
         //$arrayPostData['messages'][0]['text'] = 'ราคาทองตอนนี้ ' . getInfoGold()[87] .getInfoGold()[88].getInfoGold()[89].getInfoGold()[90].getInfoGold()[91].getInfoGold()[92].getInfoGold()[93].' บาท' ;
         replyMsg($arrayHeader,$arrayPostData);
     }
