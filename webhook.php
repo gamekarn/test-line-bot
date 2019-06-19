@@ -99,27 +99,6 @@
         replyMsg($arrayHeader,$arrayPostData);
     }
 
-    if($message == "เป่ายิงฉุบ") {
-        $math = $math.random_int(1,3);
-        $a = "";
-        if($math == 1) {
-            $a = "ค้อน";
-        } else if($math == 2) {
-            $a = "กรรไกร";
-        } else {
-            $a = "กระดาษ";
-        }
-        $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-        $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = "พิมพ์ ค้อน กรรไกร หรือ กระดาษ";
-        // if(message == "ค้อน") {
-        // }
-
-    }
-
-
-
-
 function replyMsg($arrayHeader,$arrayPostData){
         $strUrl = "https://api.line.me/v2/bot/message/reply";
         $ch = curl_init();
@@ -164,4 +143,4 @@ function replyMsg($arrayHeader,$arrayPostData){
         return $result;
     }
    exit;
-?>
+?> 
