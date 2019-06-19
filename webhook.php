@@ -94,7 +94,7 @@
         $jsonInfoGold = json_decode(getInfoGold());
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = 'ราคาทองตอนนี้ ' . $jsonInfoGold[0];
+        $arrayPostData['messages'][0]['text'] = 'ราคาทองตอนนี้ ' . getInfoGold();
         replyMsg($arrayHeader,$arrayPostData);
     }
 
