@@ -150,7 +150,7 @@ function replyMsg($arrayHeader,$arrayPostData){
     function getRest($currentLat,$currentLon){
         echo $currentLat;
         echo $currentLon;
-        $math = (string)$math.random_int(1,3);
+        $math = $math.random_int(1,3);
         $strUrl = "https://www.wongnai.com/_api/v1.5/businesses?_t=json&domain=1&spatialInfo.coordinate.latitude=$currentLat&spatialInfo.radius=1.0&spatialInfo.coordinate.longitude=$currentLon&rerank=true&features.foodOrder=true&page.number=$math";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$strUrl);
