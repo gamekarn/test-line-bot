@@ -65,20 +65,38 @@
     }
     
     if ($messageType == "location"){
+        $math = $math.random_int(0,19);
         $myLat = $arrayJson['events'][0]['message']['latitude'];    
         $myLon = $arrayJson['events'][0]['message']['longitude'];    
     
-        $jsonAQI = json_decode(getAQI($myLat,$myLon), true);
+        $jsonRest = json_decode(getRest($myLat,$myLon), true);
 
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = 'Nearest AQI : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['pollution']['aqius'] . ']';
-        $arrayPostData['messages'][1]['type'] = "text";
-        $arrayPostData['messages'][1]['text'] = 'Nearest TP : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['weather']['tp'] . ']';
+        $arrayPostData['messages'][0]['text'] = 'ชื่อร้าน: ' 
+        . $jsonRest['page']['entities'][$math]['displayName']. "\n". 'https://www.wongnai.com/restaurants/'
+        . ['page']['entities'][$math]['shortUrl'];
         //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
     
         replyMsg($arrayHeader,$arrayPostData);
     }
+
+    // if ($messageType == "location"){
+    //     $myLat = $arrayJson['events'][0]['message']['latitude'];    
+    //     $myLon = $arrayJson['events'][0]['message']['longitude'];    
+    
+    //     $jsonAQI = json_decode(getAQI($myLat,$myLon), true);
+
+    //     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+    //     $arrayPostData['messages'][0]['type'] = "text";
+    //     $arrayPostData['messages'][0]['text'] = 'Nearest AQI : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['pollution']['aqius'] . ']';
+    //     $arrayPostData['messages'][1]['type'] = "text";
+    //     $arrayPostData['messages'][1]['text'] = 'Nearest TP : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['weather']['tp'] . ']';
+    //     //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
+    
+    //     replyMsg($arrayHeader,$arrayPostData);
+    // }
+
     if($message == "สุ่มสติ๊กเกอร์"){
         $math = (string)$math.random_int(1,150);
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
@@ -118,6 +136,22 @@ function replyMsg($arrayHeader,$arrayPostData){
         echo $currentLon;
         // api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}
         $strUrl = "http://api.airvisual.com/v2/nearest_city?lat=$currentLat&lon=$currentLon&key=5uE3y4hLFGFbDmfto";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$strUrl);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_GET, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($ch);
+        curl_close ($ch);
+        return $result;
+    }
+
+    function getRest($currentLat,$currentLon){
+        echo $currentLat;
+        echo $currentLon;
+        $math = (string)$math.random_int(1,3);
+        $strUrl = "https://www.wongnai.com/_api/v1.5/businesses?_t=json&domain=1&spatialInfo.coordinate.latitude=$currentLat&spatialInfo.radius=1.0&spatialInfo.coordinate.longitude=$currentLon&rerank=true&features.foodOrder=true&page.number=$math";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$strUrl);
         curl_setopt($ch, CURLOPT_HEADER, false);
