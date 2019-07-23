@@ -74,7 +74,7 @@
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
         $arrayPostData['messages'][0]['text'] = 'ชื่อร้าน: ' 
-        . $jsonRest['page']['first']. "\n". 'https://www.wongnai.com/'
+        . $jsonRest["page"]["first"]. "\n". 'https://www.wongnai.com/'
         . $jsonRest['page']['entities'][$math]['shortUrl'];
         //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
     
