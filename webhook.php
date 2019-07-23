@@ -74,7 +74,7 @@
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
         $arrayPostData['messages'][0]['text'] = 'ชื่อร้าน: ' 
-        . $jsonRest['page']['entities']['first']. "\n". 'https://www.wongnai.com/restaurants/'
+        . $jsonRest['page']['first']. "\n". 'https://www.wongnai.com/'
         . $jsonRest['page']['entities'][$math]['shortUrl'];
         //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
     
@@ -151,7 +151,7 @@ function replyMsg($arrayHeader,$arrayPostData){
         echo $currentLat;
         echo $currentLon;
         $math = (string)$math.random_int(1,3);
-        $strUrl = "https://www.wongnai.com/_api/v1.5/businesses?_t=json&domain=1&spatialInfo.coordinate.latitude=13.863224&spatialInfo.radius=50.0&spatialInfo.coordinate.longitude=100.588226&rerank=true&features.foodOrder=true&page.number=$math";
+        $strUrl = "https://www.wongnai.com/_api/v1.5/businesses?_t=json&domain=1&spatialInfo.coordinate.latitude=$currentLat&spatialInfo.radius=1.0&spatialInfo.coordinate.longitude=$currentLon&rerank=true&features.foodOrder=true&page.number=$math";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$strUrl);
         curl_setopt($ch, CURLOPT_HEADER, false);
