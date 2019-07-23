@@ -75,7 +75,7 @@
         $arrayPostData['messages'][0]['type'] = "text";
         $arrayPostData['messages'][0]['text'] = 'ชื่อร้าน: ' 
         . $jsonRest['page']['entities'][$math]['displayName']. "\n". 'https://www.wongnai.com/restaurants/'
-        . ['page']['entities'][$math]['shortUrl'];
+        . $jsonRest['page']['entities'][$math]['shortUrl'];
         //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
     
         replyMsg($arrayHeader,$arrayPostData);
