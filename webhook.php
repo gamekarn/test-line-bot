@@ -63,39 +63,46 @@
         $arrayPostData['messages'][0]['text'] = "ถถถ";
         replyMsg($arrayHeader,$arrayPostData);
     }
-    
-    if ($messageType == "location"){
-        $math = $math.random_int(0,19);
-        $myLat = $arrayJson['events'][0]['message']['latitude'];    
-        $myLon = $arrayJson['events'][0]['message']['longitude'];    
-    
-        $jsonRest = json_decode(getRest($myLat,$myLon), true);
 
+    else if($message == "anymenu"){
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = 'ชื่อร้าน: ' 
-        . $jsonRest["page"]["first"]. "\n". 'https://www.wongnai.com/'
-        . $jsonRest['page']['entities'][$math]['shortUrl'];
-        //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
-    
+        $arrayPostData['messages'][0]['text'] = "line://app/1602023287-1q20yXmr";
         replyMsg($arrayHeader,$arrayPostData);
     }
-
+    
     // if ($messageType == "location"){
+    //     $math = $math.random_int(0,19);
     //     $myLat = $arrayJson['events'][0]['message']['latitude'];    
     //     $myLon = $arrayJson['events'][0]['message']['longitude'];    
     
-    //     $jsonAQI = json_decode(getAQI($myLat,$myLon), true);
+    //     $jsonRest = json_decode(getRest($myLat,$myLon), true);
 
     //     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     //     $arrayPostData['messages'][0]['type'] = "text";
-    //     $arrayPostData['messages'][0]['text'] = 'Nearest AQI : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['pollution']['aqius'] . ']';
-    //     $arrayPostData['messages'][1]['type'] = "text";
-    //     $arrayPostData['messages'][1]['text'] = 'Nearest TP : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['weather']['tp'] . ']';
+    //     $arrayPostData['messages'][0]['text'] = 'ชื่อร้าน: ' 
+    //     . $jsonRest["page"]["first"]. "\n". 'https://www.wongnai.com/'
+    //     . $jsonRest['page']['entities'][$math]['shortUrl'];
     //     //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
     
     //     replyMsg($arrayHeader,$arrayPostData);
     // }
+
+    if ($messageType == "location"){
+        $myLat = $arrayJson['events'][0]['message']['latitude'];    
+        $myLon = $arrayJson['events'][0]['message']['longitude'];    
+    
+        $jsonAQI = json_decode(getAQI($myLat,$myLon), true);
+
+        $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+        $arrayPostData['messages'][0]['type'] = "text";
+        $arrayPostData['messages'][0]['text'] = 'Nearest AQI : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['pollution']['aqius'] . ']';
+        $arrayPostData['messages'][1]['type'] = "text";
+        $arrayPostData['messages'][1]['text'] = 'Nearest TP : ' . $jsonAQI['data']['state'] . ' is ' . '[' . $jsonAQI['data']['current']['weather']['tp'] . ']';
+        //$arrayPostData['messages'][0]['text'] = $myLat . $myLon;
+    
+        replyMsg($arrayHeader,$arrayPostData);
+    }
 
     if($message == "สุ่มสติ๊กเกอร์"){
         $math = (string)$math.random_int(1,150);
