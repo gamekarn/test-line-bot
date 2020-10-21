@@ -146,7 +146,7 @@ function replyMsg($arrayHeader,$arrayPostData){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$strUrl);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_GET, true);
+        // curl_setopt($ch, CURLOPT_GET, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $result = curl_exec($ch);
@@ -154,21 +154,21 @@ function replyMsg($arrayHeader,$arrayPostData){
         return $result;
     }
 
-    function getRest($currentLat,$currentLon){
-        echo $currentLat;
-        echo $currentLon;
-        $math = $math.random_int(1,3);
-        $strUrl = "https://www.wongnai.com/_api/v1.5/businesses?_t=json&domain=1&spatialInfo.coordinate.latitude=$currentLat&spatialInfo.radius=1.0&spatialInfo.coordinate.longitude=$currentLon&rerank=true&features.foodOrder=true&page.number=$math";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$strUrl);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_GET, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($ch);
-        curl_close ($ch);
-        return $result;
-    }
+    // function getRest($currentLat,$currentLon){
+    //     echo $currentLat;
+    //     echo $currentLon;
+    //     $math = $math.random_int(1,3);
+    //     $strUrl = "https://www.wongnai.com/_api/v1.5/businesses?_t=json&domain=1&spatialInfo.coordinate.latitude=$currentLat&spatialInfo.radius=1.0&spatialInfo.coordinate.longitude=$currentLon&rerank=true&features.foodOrder=true&page.number=$math";
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL,$strUrl);
+    //     curl_setopt($ch, CURLOPT_HEADER, false);
+    //     // curl_setopt($ch, CURLOPT_GET, true);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    //     $result = curl_exec($ch);
+    //     curl_close ($ch);
+    //     return $result;
+    // }
 
     function getInfoGold(){
         // api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}
@@ -176,7 +176,7 @@ function replyMsg($arrayHeader,$arrayPostData){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$strUrl);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_GET, true);
+        // curl_setopt($ch, CURLOPT_GET, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $result = curl_exec($ch);
